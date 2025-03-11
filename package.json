@@ -1,0 +1,24 @@
+{
+  "name": "root",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Grzegorz Mandziak",
+  "license": "MIT",
+  "private": true,
+  "packageManager": "yarn@4.7.0",
+  "devDependencies": {
+    "turbo": "^2.4.4"
+  },
+  "workspaces": [
+    "tooling/*"
+  ],
+  "scripts": {
+    "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
+    "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
+    "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
+    "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
+    "typecheck": "turbo run typecheck",
+    "dev": "turbo watch dev --continue"
+  },
+  "prettier": "@acme/prettier-config"
+}
