@@ -10,7 +10,9 @@
     "turbo": "^2.4.4"
   },
   "workspaces": [
-    "tooling/*"
+    "tooling/*",
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
@@ -18,7 +20,8 @@
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
     "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
     "typecheck": "turbo run typecheck",
-    "dev": "turbo watch dev --continue"
+    "dev": "turbo watch dev --continue",
+    "check-all": "turbo run lint format typecheck"
   },
   "prettier": "@acme/prettier-config"
 }
