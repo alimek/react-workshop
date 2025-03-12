@@ -1,5 +1,4 @@
 import type { MouseEventHandler } from "react";
-import { useEffect, useState } from "react";
 import { cva } from "class-variance-authority";
 
 import type { Card } from "@workshop/interfaces/game";
@@ -10,7 +9,7 @@ const variants = cva(
     variants: {
       flipped: {
         true: "bg-primary",
-        false: "bg-secondary",
+        false: "bg-secondary cursor-pointer",
       },
     },
     defaultVariants: {
@@ -34,27 +33,17 @@ const valueVariants = cva(
   },
 );
 
-export function GameCard({ emoji, isMatched }: Card) {
-  const [flipped, setFlipped] = useState(false);
+interface Props extends Card {
+  onClick: MouseEventHandler<HTMLButtonElement>;
+}
 
-  const isFlipped = flipped || isMatched;
+export function GameCard({ emoji, isMatched, isFlipped, onClick }: Props) {
+  const flipped = isFlipped || isMatched;
   const cardValue = flipped ? emoji : "❓";
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setFlipped(false);
-    }, 1000);
-
-    return () => clearTimeout(timeout);
-  }, [flipped]);
-
-  const handleOnClick: MouseEventHandler<HTMLDivElement> = () => {
-    setFlipped((prev) => !prev);
-  };
-
   return (
-    <div className={variants({ flipped: isFlipped })} onClick={handleOnClick}>
-      <span className={valueVariants({ flipped: isFlipped })}>{cardValue}</span>
-    </div>
+    <button type="button" className={variants({ flipped })} onClick={onClick}>
+      <span className={valueVariants({ flipped })}>{cardValue}</span>
+    </button>
   );
 }

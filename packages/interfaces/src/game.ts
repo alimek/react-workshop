@@ -20,6 +20,10 @@ export interface Card {
    */
   emoji: string;
   /**
+   * Whether the card is flipped
+   */
+  isFlipped: boolean;
+  /**
    * Whether the card is matched
    */
   isMatched: boolean;
