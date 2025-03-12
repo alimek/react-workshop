@@ -1,7 +1,9 @@
 # 🏋️ React Workshop – Day 1: Basics & Game Board Setup
 
 ## 🎯 Goal
+
 By the end of **Day 1**, participants will:
+
 - Understand **React components** and **props**.
 - Use **state (`useState`)** to handle UI changes.
 - Use **effects (`useEffect`)** for lifecycle management.
@@ -10,7 +12,9 @@ By the end of **Day 1**, participants will:
 ---
 
 ## 📌 Overview
+
 Participants will create a **Fitness Memory Game**, a simple grid-based game where players flip cards to match fitness-related icons. The game will:
+
 - Display a **grid of hidden cards**.
 - Reveal a card on **click**.
 - Hide cards again after a short delay if they do not match.
@@ -20,16 +24,24 @@ Participants will create a **Fitness Memory Game**, a simple grid-based game whe
 ---
 
 ## 📂 Project Structure
+
 Participants will structure the project as follows:
 
 ```
 apps/memory-game/
-│── src/
-│   ├── components/
-│   │   ├── GameBoard.js (Renders the game grid)
-│   │   ├── Card.js (Handles individual card state)
-│   ├── App.js (Main entry point)
-│   ├── index.css (Basic styles)
+│── app/
+|   |── routes/
+|   |──── here should be entry point for ReactRouter routes
+|   |── components/ - shared components
+|   |── hooks/ - shared hooks
+│   ├── features/
+│   │   ├── {featureName}
+|   |   |──── components/ - feature releated components
+|   |   |──── pages/ - feature related pages
+|   |   |──── hooks/ - feature related hooks
+|   |   |────
+│   ├── routes.ts main entrypoint which define routes in RR7
+│   ├── app.css (load Tailwind CSS)
 │── package.json (Project dependencies)
 ```
 
@@ -38,16 +50,19 @@ apps/memory-game/
 ## 🛠 Features to Implement
 
 ### **1️⃣ Static Game Board**
+
 - Create a **GameBoard** component that renders a **grid of cards**.
 - Use an array of **emojis** (e.g., 🏃, 🏋️, 🚴).
 - Render **hidden cards** initially.
 
 ### **2️⃣ Card Flipping with State**
+
 - Introduce `useState` to track if a card is **flipped** or not.
 - Clicking a card **reveals** its content.
 - Clicking again hides it.
 
 ### **3️⃣ Auto Reset with Effects**
+
 - Use `useEffect` to **automatically hide** cards after a delay.
 - Ensure non-matching cards flip back after **1 second**.
 
@@ -56,10 +71,12 @@ apps/memory-game/
 ## 📜 API & Data Model
 
 The game will **not use an external API** in Day 1. Instead, participants will:
+
 - Use **hardcoded data** (an array of fitness-related icons).
 - Define a **basic game state** (e.g., an array of flipped cards).
 
 Example game data:
+
 ```json
 ["🏃", "💪", "🏋️", "🤸", "🚴", "🧘"]
 ```
@@ -69,13 +86,15 @@ Example game data:
 ## 🎯 Day 1 Summary
 
 By the end of **Day 1**, participants will:
+
 - ✅ Have a **basic memory game board**.
 - ✅ Use **props** to pass data between components.
 - ✅ Manage **state** with `useState`.
 - ✅ Use **effects** (`useEffect`) to handle **timing logic**.
 - ✅ Implement **basic interactions** (flipping & auto-reset).
 
-📌 **Next up (Day 2):** 
+📌 **Next up (Day 2):**
+
 - Adding a **game settings form** (grid size selection).
 - Managing **global state** with Zustand.
 - Using **TanStack Query** to fetch dynamic game configurations.
