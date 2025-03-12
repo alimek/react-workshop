@@ -1,3 +1,5 @@
+import type { MouseEventHandler } from "react";
+import { useState } from "react";
 import { cva } from "class-variance-authority";
 
 import type { Card } from "@workshop/interfaces/game";
@@ -32,13 +34,19 @@ const valueVariants = cva(
   },
 );
 
-export function GameCard({ emoji, isFlipped, isMatched }: Card) {
-  const flipped = isFlipped || isMatched;
+export function GameCard({ emoji, isMatched }: Card) {
+  const [flipped, setFlipped] = useState(false);
+
+  const isFlipped = flipped || isMatched;
   const cardValue = flipped ? emoji : "❓";
 
+  const handleOnClick: MouseEventHandler<HTMLDivElement> = () => {
+    setFlipped((prev) => !prev);
+  };
+
   return (
-    <div className={variants({ flipped })}>
-      <span className={valueVariants({ flipped })}>{cardValue}</span>
+    <div className={variants({ flipped: isFlipped })} onClick={handleOnClick}>
+      <span className={valueVariants({ flipped: isFlipped })}>{cardValue}</span>
     </div>
   );
 }
