@@ -1,5 +1,5 @@
 import type { MouseEventHandler } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cva } from "class-variance-authority";
 
 import type { Card } from "@workshop/interfaces/game";
@@ -39,6 +39,14 @@ export function GameCard({ emoji, isMatched }: Card) {
 
   const isFlipped = flipped || isMatched;
   const cardValue = flipped ? emoji : "❓";
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setFlipped(false);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [flipped]);
 
   const handleOnClick: MouseEventHandler<HTMLDivElement> = () => {
     setFlipped((prev) => !prev);
