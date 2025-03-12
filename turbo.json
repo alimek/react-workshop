@@ -28,6 +28,11 @@
                 ".cache/.eslintcache"
             ]
         },
+        "test": {
+            "dependsOn": [
+                "^topo"
+            ]
+        },
         "typecheck": {
             "dependsOn": [
                 "^topo"
@@ -44,11 +49,13 @@
         }
     },
     "globalEnv": [
-        "PORT"
+        "PORT",
+        "DEV"
     ],
     "globalPassThroughEnv": [
         "NODE_ENV",
         "CI",
+        "DEV",
         "npm_lifecycle_event"
     ]
 }

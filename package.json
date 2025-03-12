@@ -21,7 +21,8 @@
     "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
     "typecheck": "turbo run typecheck",
     "dev": "turbo watch dev --continue",
-    "check-all": "turbo run lint format typecheck"
+    "test": "turbo run test --continue -- run",
+    "check-all": "turbo run lint format typecheck test"
   },
   "prettier": "@workshop/prettier-config"
 }
