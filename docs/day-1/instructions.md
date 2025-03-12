@@ -32,6 +32,7 @@ apps/memory-game/
 │── app/
 |   |── routes/
 |   |──── here should be entry point for ReactRouter routes
+|   |── lib/ - shared libraries/utils functions
 |   |── components/ - shared components
 |   |── hooks/ - shared hooks
 │   ├── features/
@@ -39,6 +40,7 @@ apps/memory-game/
 |   |   |──── components/ - feature releated components
 |   |   |──── pages/ - feature related pages
 |   |   |──── hooks/ - feature related hooks
+|   |   |──── lib/ - feature related libraries/utils fucntion
 |   |   |────
 │   ├── routes.ts main entrypoint which define routes in RR7
 │   ├── app.css (load Tailwind CSS)

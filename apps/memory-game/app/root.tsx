@@ -33,8 +33,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        {children}
+      <body className="bg-background text-foreground antialiased">
+        <div className="container mx-auto flex min-h-screen py-4 max-sm:px-4">
+          {children}
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>
