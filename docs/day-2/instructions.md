@@ -44,7 +44,7 @@ Participants will extend the **Fitness Memory Game** by:
 ## 📂 Project Structure (Updated)
 
 ```
-apps/fitness-memory-game/
+apps/memory-game/
 │── src/
 │   ├── components/
 │   │   ├── GameBoard.js (Renders the dynamic game grid)

@@ -48,7 +48,7 @@ Participants will finalize the **Fitness Memory Game** by:
 ## 📂 Project Structure (Final Version)
 
 ```
-apps/fitness-memory-game/
+apps/memory-game/
 │── src/
 │   ├── components/
 │   │   ├── GameBoard.js (Handles game state & logic)

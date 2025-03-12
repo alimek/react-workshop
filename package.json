@@ -23,5 +23,5 @@
     "dev": "turbo watch dev --continue",
     "check-all": "turbo run lint format typecheck"
   },
-  "prettier": "@acme/prettier-config"
+  "prettier": "@workshop/prettier-config"
 }
