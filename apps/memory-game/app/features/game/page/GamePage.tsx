@@ -1,3 +1,5 @@
+import { GameBoard } from "../components/GameBoard";
+
 export function GamePage() {
-  return <div>GamePage</div>;
+  return <GameBoard />;
 }
