@@ -54,7 +54,8 @@ apps/memory-game/
 ### **1️⃣ Static Game Board**
 
 - Create a **GameBoard** component that renders a **grid of cards**.
-- Use an array of **emojis** (e.g., 🏃, 🏋️, 🚴).
+- Create a **GameCard** component that render single Card
+- Use an harcoded array of **emojis** (e.g., 🏃, 🏋️, 🚴).
 - Render **hidden cards** initially.
 
 ### **2️⃣ Card Flipping with State**
