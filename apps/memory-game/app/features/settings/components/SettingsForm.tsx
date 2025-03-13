@@ -1,9 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 
-import { defaultGameConfig, levels } from "@workshop/interfaces/game";
-
+import type { SettingsState } from "~/lib/store/settings";
 import { Button } from "~/components/ui/button";
 import {
   Form,
@@ -22,32 +20,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
+import { settingsSchema, useSettingsStore } from "~/lib/store/settings";
 
-const schema = z.object({
-  gridSize: z.number().min(2).max(10).step(2),
-  level: z.enum(levels),
-});
+export function SettingsForm() {
+  const gridSize = useSettingsStore((state) => state.gridSize);
+  const level = useSettingsStore((state) => state.level);
+  const { updateSettings } = useSettingsStore((state) => state.actions);
 
-export type FormValues = z.infer<typeof schema>;
-
-interface Props {
-  onSubmit: (values: FormValues) => void;
-}
-
-export function SettingsForm({ onSubmit }: Props) {
-  const form = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: defaultGameConfig,
+  const form = useForm<SettingsState>({
+    resolver: zodResolver(settingsSchema),
+    defaultValues: {
+      gridSize,
+      level,
+    },
   });
 
-  const handleSubmit = (values: z.infer<typeof schema>) => {
-    onSubmit(values);
-  };
+  const handleSubmit = form.handleSubmit((values) => {
+    updateSettings(values);
+    form.reset(values);
+  });
+
+  const { isDirty } = form.formState;
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(handleSubmit)}
+        onSubmit={handleSubmit}
         className="space-y-4"
         aria-label="Game settings form"
       >
@@ -62,7 +60,7 @@ export function SettingsForm({ onSubmit }: Props) {
                   <Input
                     id="gridSize"
                     type="number"
-                    aria-describedby="gridSize-description gridSize-error"
+                    aria-describedby="gridSize-description"
                     aria-invalid={!!fieldState.error}
                     {...field}
                     onChange={(e) => {
@@ -123,9 +121,11 @@ export function SettingsForm({ onSubmit }: Props) {
             </FormItem>
           )}
         />
-        <Button type="submit" aria-label="Save settings">
-          Save
-        </Button>
+        {isDirty && (
+          <Button type="submit" aria-label="Save settings">
+            Save
+          </Button>
+        )}
       </form>
     </Form>
   );
