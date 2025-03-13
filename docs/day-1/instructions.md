@@ -38,10 +38,10 @@ apps/memory-game/
 |   |── hooks/ - shared hooks
 │   ├── features/
 │   │   ├── {featureName}
-|   |   |──── components/ - feature releated components
+|   |   |──── components/ - feature related components
 |   |   |──── pages/ - feature related pages
 |   |   |──── hooks/ - feature related hooks
-|   |   |──── lib/ - feature related libraries/utils fucntion
+|   |   |──── lib/ - feature related libraries/utils functions
 |   |   |────
 │   ├── routes.ts main entrypoint which define routes in RR7
 │   ├── app.css (load Tailwind CSS)
@@ -55,7 +55,7 @@ apps/memory-game/
 The game will **not use an external API** in Day 1. Instead, participants will:
 
 - Use **hardcoded data** (an array of fitness-related icons).
-- Define a **basic game state** (e.g., an array of flipped cards) at the begining.
+- Define a **basic game state** (e.g., an array of flipped cards) at the beginning.
 
 Example game data:
 
@@ -71,7 +71,7 @@ Example game data:
 
 - Create a **GameBoard** component that renders a **grid of cards**.
 - Create a **GameCard** component that render single Card
-- Use an harcoded array of **emojis** (e.g., 🏃, 🏋️, 🚴).
+- Use an hardcoded array of **emojis** (e.g., 🏃, 🏋️, 🚴).
 - Render **hidden cards** initially.
 
 ### **2️⃣ Card Flipping with State**
@@ -86,7 +86,7 @@ Example game data:
 
 ### **4️⃣ Handle clicking many card withing hidding time**
 
-- Introcude context which will store `size` and `cards` for current game.
+- Introduce context which will store `size` and `cards` for current game.
 - Use `gameContext` in **GameBoard** component
 - Render `cards` from `gameContext` in the **GameBoard**
 - Extend **GameBoard** component for `onClickCard` prop.
@@ -94,7 +94,7 @@ Example game data:
   - Ensure non-matching cards flip back after **3 second**.
   - First click on card, should flip the card. If user click the same card again, it does nothing, it should auto flip within 3 seconds.
   - If user click second card within 3 seconds, flip 2nd card.
-  - If user click third card within that 3 second from 1st card click, flip two previos card and and loop to second point with the 3rd card being flipped only.
+  - If user click third card within that 3 second from 1st card click, flip two previous card and and loop to second point with the 3rd card being flipped only.
 
 ### **5️⃣ Handle click on 2nd card to check if it is matching previous**
 
