@@ -1,6 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
+import { boardSizes } from "@workshop/interfaces/game";
+
 import type { SettingsState } from "~/lib/store/settings";
 import { Button } from "~/components/ui/button";
 import {
@@ -11,7 +13,6 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -57,22 +58,28 @@ export function SettingsForm() {
               <FormLabel htmlFor="gridSize">Grid Size</FormLabel>
               <FormControl>
                 <div className="space-y-2">
-                  <Input
-                    id="gridSize"
-                    type="number"
-                    aria-describedby="gridSize-description"
-                    aria-invalid={!!fieldState.error}
-                    {...field}
-                    onChange={(e) => {
-                      field.onChange(Number(e.target.value));
-                    }}
-                  />
-                  <div
-                    id="gridSize-description"
-                    className="text-muted-foreground text-sm"
+                  <Select
+                    value={field.value.toString()}
+                    onValueChange={field.onChange}
+                    name="difficulty"
                   >
-                    Choose an even number between 2 and 10
-                  </div>
+                    <SelectTrigger
+                      id="difficulty-select"
+                      className="w-full"
+                      aria-labelledby="gridSize-label"
+                    >
+                      <SelectValue placeholder="Select a grid size" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {boardSizes.map((size) => (
+                          <SelectItem key={size} value={size.toString()}>
+                            {size}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
                   {fieldState.error && (
                     <FormMessage id="gridSize-error" role="alert">
                       {fieldState.error.message}

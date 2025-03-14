@@ -12,9 +12,9 @@ export interface GameConfig {
 export const boardSizes = [2, 4, 6, 8, 10] as const;
 export const levels = ["easy", "medium", "hard"] as const;
 export const levelToRevealTime = {
-  easy: 3,
-  medium: 5,
-  hard: 10,
+  easy: 10,
+  medium: 4,
+  hard: 1,
 } as const satisfies Record<(typeof levels)[number], number>;
 
 export const defaultGameConfig: GameConfig = {

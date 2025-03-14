@@ -1,6 +1,7 @@
+import { Link } from "react-router";
+
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { Separator } from "~/components/ui/separator";
 import { useSettingsStoreReady } from "~/lib/store/settings";
 import { SettingsForm } from "../components/SettingsForm";
 
@@ -21,7 +22,9 @@ export function SettingsPage() {
           <SettingsForm />
         </CardContent>
       </Card>
-      <Button>Start Game</Button>
+      <Button asChild>
+        <Link to="/game">Start Game </Link>
+      </Button>
     </div>
   );
 }

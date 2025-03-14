@@ -5,27 +5,6 @@ import { defaultGameConfig } from "@workshop/interfaces/game";
 
 import { useSettingsStore } from "./settings";
 
-// We'll mock the persist middleware rather than localStorage
-vi.mock("zustand/middleware", async () => {
-  const actual = await vi.importActual("zustand/middleware");
-  return {
-    ...(actual as object),
-    persist: vi.fn().mockImplementation((config) => {
-      // Just return the config object without actual persistence
-      return config;
-    }),
-  };
-});
-
-// Mock React to avoid hook-related errors
-vi.mock("react", async () => {
-  const actual = await vi.importActual("react");
-  return {
-    ...(actual as object),
-    useSyncExternalStore: vi.fn((subscribe, getSnapshot) => getSnapshot()),
-  };
-});
-
 describe("Settings Store", () => {
   beforeEach(() => {
     const { getState } = useSettingsStore;

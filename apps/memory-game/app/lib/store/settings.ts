@@ -5,7 +5,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { defaultGameConfig, levels } from "@workshop/interfaces/game";
 
 export const settingsSchema = z.object({
-  gridSize: z.number().min(2).max(10).step(2),
+  gridSize: z.string().transform((value) => Number(value)),
   level: z.enum(levels),
 });
 
