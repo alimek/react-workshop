@@ -15,6 +15,8 @@ import "./app.css";
 
 import { useEffect } from "react";
 
+import { Providers } from "./components/ui/Providers";
+
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
@@ -30,7 +32,7 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    scan({ enabled: true });
+    scan({ enabled: false, showToolbar: true });
   }, []);
 
   return (
@@ -43,7 +45,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="bg-background text-foreground antialiased">
         <div className="container mx-auto flex min-h-screen py-4 max-sm:px-4">
-          {children}
+          <Providers>{children}</Providers>
         </div>
         <ScrollRestoration />
         <Scripts />

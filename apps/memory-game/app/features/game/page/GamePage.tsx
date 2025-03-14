@@ -1,17 +1,18 @@
+import { Suspense } from "react";
+
+import { useSettingsStoreReady } from "~/lib/store/settings";
 import { GameBoard } from "../components/GameBoard";
-import { GameProvider } from "../context/game";
-import { useGame } from "../hooks/game-logic";
 
 export function GamePage() {
-  const { isReady, cards, handleCardClick } = useGame();
+  const isReady = useSettingsStoreReady();
 
   if (!isReady) {
-    return <div>Loading...</div>;
+    return <div>Loading Settings...</div>;
   }
 
   return (
-    <GameProvider value={{ size: 2, cards }}>
-      <GameBoard onCardClick={handleCardClick} />
-    </GameProvider>
+    <Suspense fallback={<div>Loading Game...</div>}>
+      <GameBoard />
+    </Suspense>
   );
 }

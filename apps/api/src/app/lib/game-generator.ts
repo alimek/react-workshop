@@ -20,25 +20,21 @@ export function generateBoard(size: number) {
   const shuffledEmojis = selectedEmojis.sort(() => Math.random() - 0.5);
 
   // Create the board grid
-  const board = [];
+  const board: Card[] = [];
   let emojiIndex = 0;
 
-  for (let i = 0; i < size; i++) {
-    const row: Card[] = [];
-    for (let j = 0; j < size; j++) {
-      const emoji = shuffledEmojis[emojiIndex++];
+  for (let i = 0; i < size * size; i++) {
+    const emoji = shuffledEmojis[emojiIndex++];
 
-      if (!emoji) {
-        throw new Error("Not enough emojis to generate board");
-      }
-
-      row.push({
-        emoji,
-        isFlipped: false,
-        isMatched: false,
-      });
+    if (!emoji) {
+      throw new Error("Not enough emojis to generate board");
     }
-    board.push(row);
+
+    board.push({
+      emoji,
+      isFlipped: false,
+      isMatched: false,
+    });
   }
 
   return board;

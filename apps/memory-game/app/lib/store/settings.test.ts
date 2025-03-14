@@ -1,5 +1,5 @@
 import { act } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { defaultGameConfig } from "@workshop/interfaces/game";
 
@@ -9,15 +9,7 @@ describe("Settings Store", () => {
   beforeEach(() => {
     const { getState } = useSettingsStore;
     const { actions } = getState();
-    actions.resetSettings();
     vi.clearAllMocks();
-  });
-
-  afterEach(() => {
-    // Reset the store state after each test
-    act(() => {
-      useSettingsStore.getState().actions.resetSettings();
-    });
   });
 
   it("should initialize with default values", () => {
@@ -43,27 +35,6 @@ describe("Settings Store", () => {
     const updatedState = useSettingsStore.getState();
     expect(updatedState.gridSize).toBe(4);
     expect(updatedState.level).toBe("medium");
-  });
-
-  it("should reset settings to default values", () => {
-    const { actions } = useSettingsStore.getState();
-
-    // First update the settings
-    act(() => {
-      actions.updateSettings({
-        gridSize: 6,
-        level: "hard",
-      });
-    });
-
-    // Then reset
-    act(() => {
-      actions.resetSettings();
-    });
-
-    const resetState = useSettingsStore.getState();
-    expect(resetState.gridSize).toBe(defaultGameConfig.boardSize);
-    expect(resetState.level).toBe(defaultGameConfig.level);
   });
 
   it("should set hydration status", () => {

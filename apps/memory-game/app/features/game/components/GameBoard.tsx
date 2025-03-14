@@ -1,17 +1,10 @@
 import type { CSSProperties } from "react";
 
-import type { Card } from "@workshop/interfaces/game";
-
-import { useGameCards, useGameSize } from "../hooks/game";
+import { useGame } from "../hooks/game-logic";
 import { GameCard } from "./GameCard";
 
-interface Props {
-  onCardClick: (params: { card: Card; index: number }) => void;
-}
-
-export function GameBoard({ onCardClick }: Props) {
-  const size = useGameSize();
-  const cards = useGameCards();
+export function GameBoard() {
+  const { handleCardClick, cards, size } = useGame();
 
   return (
     <div
@@ -25,7 +18,7 @@ export function GameBoard({ onCardClick }: Props) {
           emoji={card.emoji}
           isFlipped={card.isFlipped}
           isMatched={card.isMatched}
-          onClick={() => onCardClick({ card, index })}
+          onClick={() => handleCardClick({ card, index })}
         />
       ))}
     </div>

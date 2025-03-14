@@ -3,13 +3,12 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { Card } from "@workshop/interfaces/game";
 
-import * as gameHooks from "../hooks/game";
+import * as gameHooks from "../hooks/game-logic";
 import { GameBoard } from "./GameBoard";
 
 // Mock for the custom hooks
-vi.mock("../hooks/game", () => ({
-  useGameSize: vi.fn(),
-  useGameCards: vi.fn(),
+vi.mock("../hooks/game-logic", () => ({
+  useGame: vi.fn(),
 }));
 
 describe("GameBoard", () => {
@@ -28,13 +27,16 @@ describe("GameBoard", () => {
     vi.clearAllMocks();
 
     // Setup default mock implementations
-    vi.mocked(gameHooks.useGameSize).mockReturnValue(mockSize);
-    vi.mocked(gameHooks.useGameCards).mockReturnValue(mockCards);
+    vi.mocked(gameHooks.useGame).mockReturnValue({
+      cards: mockCards,
+      size: mockSize,
+      handleCardClick: mockOnCardClick,
+    });
   });
 
-  it("renders with the correct grid size from useGameSize", () => {
+  it("renders with the correct grid size from useGame", () => {
     // Arrange
-    render(<GameBoard onCardClick={mockOnCardClick} />);
+    render(<GameBoard />);
 
     // Act
     const gridElement = screen.getByTestId("game-board-grid");
@@ -48,7 +50,7 @@ describe("GameBoard", () => {
 
   it("renders the correct number of GameCard components", () => {
     // Arrange
-    render(<GameBoard onCardClick={mockOnCardClick} />);
+    render(<GameBoard />);
 
     // Act
     const cardButtons = screen.getAllByRole("button");
@@ -59,7 +61,7 @@ describe("GameBoard", () => {
 
   it("passes the correct props to each GameCard", () => {
     // Arrange
-    render(<GameBoard onCardClick={mockOnCardClick} />);
+    render(<GameBoard />);
 
     // Act & Assert
     // Get all question marks - there should be two of them (first and fourth cards)
@@ -73,7 +75,7 @@ describe("GameBoard", () => {
 
   it("calls onCardClick with the correct parameters when a card is clicked", () => {
     // Arrange
-    render(<GameBoard onCardClick={mockOnCardClick} />);
+    render(<GameBoard />);
 
     // Act
     const cardButtons = screen.getAllByRole("button");
@@ -89,7 +91,7 @@ describe("GameBoard", () => {
 
   it("calls onCardClick with the correct parameters when another card is clicked", () => {
     // Arrange
-    render(<GameBoard onCardClick={mockOnCardClick} />);
+    render(<GameBoard />);
 
     // Act
     const cardButtons = screen.getAllByRole("button");
@@ -112,11 +114,14 @@ describe("GameBoard", () => {
     const testSize = 1;
 
     // Override the mocks for this test
-    vi.mocked(gameHooks.useGameSize).mockReturnValue(testSize);
-    vi.mocked(gameHooks.useGameCards).mockReturnValue(testCards);
+    vi.mocked(gameHooks.useGame).mockReturnValue({
+      cards: testCards,
+      size: testSize,
+      handleCardClick: mockOnCardClick,
+    });
 
     // Act
-    render(<GameBoard onCardClick={mockOnCardClick} />);
+    render(<GameBoard />);
 
     // Assert
     const gridElement = screen.getByTestId("game-board-grid");

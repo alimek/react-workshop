@@ -15,7 +15,6 @@ interface SettingsStore extends SettingsState {
   isHydrated: boolean;
   actions: {
     updateSettings: (settings: SettingsState) => void;
-    resetSettings: () => void;
     setHydrated: (isHydrated: boolean) => void;
   };
 }
@@ -28,11 +27,6 @@ export const useSettingsStore = create<SettingsStore>()(
       isHydrated: false,
       actions: {
         updateSettings: (settings) => set(() => settings),
-        resetSettings: () =>
-          set(() => ({
-            gridSize: defaultGameConfig.boardSize,
-            level: defaultGameConfig.level,
-          })),
         setHydrated: (isHydrated) => set(() => ({ isHydrated })),
       },
     }),

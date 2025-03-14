@@ -3,23 +3,18 @@ import { useEffect, useRef, useState } from "react";
 import type { Card } from "@workshop/interfaces/game";
 import { levelToRevealTime } from "@workshop/interfaces/game";
 
-import { useSettingsStore, useSettingsStoreReady } from "~/lib/store/settings";
-
-const initialCards = [
-  { emoji: "🐶", isFlipped: false, isMatched: false },
-  { emoji: "🐈", isFlipped: false, isMatched: false },
-  { emoji: "🐶", isFlipped: false, isMatched: false },
-  { emoji: "🐈", isFlipped: false, isMatched: false },
-] satisfies Card[];
+import { useSettingsStore } from "~/lib/store/settings";
+import { useGameCards } from "./game";
 
 export const useGame = () => {
-  const [cards, setCards] = useState<Card[]>(initialCards);
+  const size = useSettingsStore((state) => state.gridSize);
 
-  const isReady = useSettingsStoreReady();
+  const [cards, setCards] = useState<Card[]>([]);
   const level = useSettingsStore((state) => state.level);
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const revealTime = levelToRevealTime[level] * 1000;
+  const { cards: initialCards } = useGameCards();
 
   // Clear any existing timeout when component unmounts
   useEffect(() => {
@@ -29,6 +24,10 @@ export const useGame = () => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    setCards(initialCards);
+  }, [initialCards]);
 
   // Set timeout when flippedIndices changes
   useEffect(() => {
@@ -111,8 +110,8 @@ export const useGame = () => {
   };
 
   return {
-    isReady,
     cards,
+    size,
     handleCardClick,
   };
 };
