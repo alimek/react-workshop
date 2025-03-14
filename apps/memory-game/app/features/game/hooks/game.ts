@@ -13,7 +13,7 @@ const getGameBoard = async (size: number, delay: number) => {
   return data.board;
 };
 
-export const useGameCards = (delay = 0) => {
+export const useGameConfig = (delay = 0) => {
   const size = useSettingsStore((state) => state.gridSize);
 
   const { data, ...other } = useSuspenseQuery({

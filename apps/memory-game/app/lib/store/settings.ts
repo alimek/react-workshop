@@ -46,3 +46,8 @@ export const useSettingsStore = create<SettingsStore>()(
 
 export const useSettingsStoreReady = () =>
   useSettingsStore((state) => state.isHydrated);
+
+export const useSettingsLevel = () => useSettingsStore((state) => state.level);
+
+export const useSettingsGridSize = () =>
+  useSettingsStore((state) => state.gridSize);
