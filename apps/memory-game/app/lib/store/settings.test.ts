@@ -7,8 +7,6 @@ import { useSettingsStore } from "./settings";
 
 describe("Settings Store", () => {
   beforeEach(() => {
-    const { getState } = useSettingsStore;
-    const { actions } = getState();
     vi.clearAllMocks();
   });
 
