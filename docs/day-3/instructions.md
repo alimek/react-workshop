@@ -4,7 +4,6 @@
 
 By the end of **Day 3**, participants will:
 
-- Implement **game logic** (matching pairs, win conditions, score tracking).
 - Use **React state & effects** to manage gameplay.
 - Add **animations for a better user experience**.
 - Refactor components for **better reusability & maintainability**.
