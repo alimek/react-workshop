@@ -7,13 +7,14 @@ By the end of **Day 1**, participants will:
 - Understand **React components** and **props**.
 - Use **state (`useState`)** to handle UI changes.
 - Use **effects (`useEffect`)** for lifecycle management.
-- Build the foundation of a **Fitness Memory Game**.
+- Use **context (`createContext`)** to share state between components.
+- Build the foundation of a **Memory Game**.
 
 ---
 
 ## 📌 Overview
 
-Participants will create a **Fitness Memory Game**, a simple grid-based game where players flip cards to match fitness-related icons. The game will:
+Participants will create a **Memory Game**, a simple grid-based game where players flip cards to match fitness-related icons. The game will:
 
 - Display a **grid of hidden cards**.
 - Reveal a card on **click**.
@@ -37,14 +38,29 @@ apps/memory-game/
 |   |── hooks/ - shared hooks
 │   ├── features/
 │   │   ├── {featureName}
-|   |   |──── components/ - feature releated components
+|   |   |──── components/ - feature related components
 |   |   |──── pages/ - feature related pages
 |   |   |──── hooks/ - feature related hooks
-|   |   |──── lib/ - feature related libraries/utils fucntion
+|   |   |──── lib/ - feature related libraries/utils functions
 |   |   |────
 │   ├── routes.ts main entrypoint which define routes in RR7
 │   ├── app.css (load Tailwind CSS)
 │── package.json (Project dependencies)
+```
+
+---
+
+## 📜 API & Data Model
+
+The game will **not use an external API** in Day 1. Instead, participants will:
+
+- Use **hardcoded data** (an array of fitness-related icons).
+- Define a **basic game state** (e.g., an array of flipped cards) at the beginning.
+
+Example game data:
+
+```json
+["🏃", "💪", "🏋️", "🤸", "🚴", "🧘"]
 ```
 
 ---
@@ -54,7 +70,8 @@ apps/memory-game/
 ### **1️⃣ Static Game Board**
 
 - Create a **GameBoard** component that renders a **grid of cards**.
-- Use an array of **emojis** (e.g., 🏃, 🏋️, 🚴).
+- Create a **GameCard** component that render single Card
+- Use an hardcoded array of **emojis** (e.g., 🏃, 🏋️, 🚴).
 - Render **hidden cards** initially.
 
 ### **2️⃣ Card Flipping with State**
@@ -66,22 +83,22 @@ apps/memory-game/
 ### **3️⃣ Auto Reset with Effects**
 
 - Use `useEffect` to **automatically hide** cards after a delay.
-- Ensure non-matching cards flip back after **1 second**.
 
----
+### **4️⃣ Handle clicking many card withing hidding time**
 
-## 📜 API & Data Model
+- Introduce context which will store `size` and `cards` for current game.
+- Use `gameContext` in **GameBoard** component
+- Render `cards` from `gameContext` in the **GameBoard**
+- Extend **GameBoard** component for `onClickCard` prop.
+- Implement `onClickCard` handle in `GamePage`
+  - Ensure non-matching cards flip back after **3 second**.
+  - First click on card, should flip the card. If user click the same card again, it does nothing, it should auto flip within 3 seconds.
+  - If user click second card within 3 seconds, flip 2nd card.
+  - If user click third card within that 3 second from 1st card click, flip two previous card and and loop to second point with the 3rd card being flipped only.
 
-The game will **not use an external API** in Day 1. Instead, participants will:
+### **5️⃣ Handle click on 2nd card to check if it is matching previous**
 
-- Use **hardcoded data** (an array of fitness-related icons).
-- Define a **basic game state** (e.g., an array of flipped cards).
-
-Example game data:
-
-```json
-["🏃", "💪", "🏋️", "🤸", "🚴", "🧘"]
-```
+- When user click second card, check if it is the same type card as previous, if so mark both as `isMatched: true`.
 
 ---
 
@@ -93,6 +110,7 @@ By the end of **Day 1**, participants will:
 - ✅ Use **props** to pass data between components.
 - ✅ Manage **state** with `useState`.
 - ✅ Use **effects** (`useEffect`) to handle **timing logic**.
+- ✅ User **context** (`createContext` and `useContext`) to avoid props drilling.
 - ✅ Implement **basic interactions** (flipping & auto-reset).
 
 📌 **Next up (Day 2):**
